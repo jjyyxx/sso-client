@@ -10,9 +10,9 @@
 
 <body>
     <script src="https://cdn.bootcss.com/js-cookie/latest/js.cookie.min.js"></script>
-    <script src="./ObAuth.js"></script>
+    <script src="./ObAuthClient.js"></script>
     <script>
-        Ob.Auth.getUserInfo().then((info) => {
+        Ob.AuthClient.getUserInfo().then((info) => {
             alert('Logged in')
         }).catch(() => {
             alert('Not logged in')

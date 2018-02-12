@@ -1,9 +1,9 @@
 const Ob = window.Ob || {}
 
-Ob.Auth = {
+Ob.AuthClient = {
     Config: {
         ssoOrigin: 'https://id.ob-studio.cn',
-        ssoPath: '/api/login',
+        ssoPath: '/api/token.html',
         get ssoUrl() {
             return this.ssoOrigin + this.ssoPath
         },
