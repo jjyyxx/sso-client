@@ -6,59 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        #login-iframe {
-            visibility: hidden;
-            height: 0px;
-            width: 0px;
-            margin: 0px;
-            padding: 0px;
-        }
-    </style>
 </head>
 
 <body>
-    <iframe id="login-iframe" referrerpolicy="origin"></iframe>
-    <label id="status"></label>
+    <script src="https://cdn.bootcss.com/js-cookie/latest/js.cookie.min.js"></script>
+    <script src="./ObAuth.js"></script>
     <script>
-        const ssoOrigin = 'https://id.ob-studio.cn'
-        const ssoPath = ssoOrigin + '/'
-        const login = document.getElementById('login-iframe')
-        const label = document.getElementById('status')
-        const token = getCookie('token')
-
-        function getCookie(cname) {
-            var name = cname + '='
-            var decodedCookie = decodeURIComponent(document.cookie)
-            var ca = decodedCookie.split(';')
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i]
-                while (c.charAt(0) == ' ') {
-                    c = c.substring(1)
-                }
-                if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length)
-                }
-            }
-            return ''
-        }
-        function setCookie(cname, cvalue, exdays) {
-            var d = new Date()
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
-            var expires = "expires=" + d.toUTCString()
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
-        }
-        function receiveMessage(event) {
-            if (event.origin !== ssoOrigin)
-                return
-            setCookie('token', event.data, 1)
-            label.textContent = 'You are logged in!'
-        }
-        if (token === '') {
-            label.textContent = 'You are not logged in!'
-            login.src = ssoPath
-            window.addEventListener('message', receiveMessage, false)
-        }
+        Ob.Auth.getUserInfo().then((info) => {
+            alert('Logged in')
+        }).catch(() => {
+            alert('Not logged in')
+        })
+        alert('Login...')
     </script>
 </body>
 
